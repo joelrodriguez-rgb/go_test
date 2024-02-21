@@ -9,13 +9,15 @@ import (
 
 func main() {
 	var op model.UserOperation = model.NewUserOperation()
-	var repository repository.UserRepository = repository.NewUserRepositoryImpl(op)
+	var repository = repository.NewUserRepositoryImpl(op)
 
-	var service  = service.NewUserServiceImpl(repository)
-	newUser, _ := service.CreateUser(model.UserEntity{Id: 1, Name: "Pedro"})
+	var service = service.NewUserServiceImpl(repository)
+	service.CreateUser(model.UserEntity{Id: 1, Name: "Pedro"})
 
-	fmt.Println(newUser)
+	fmt.Println(repository.Users)
 
+	service.DeleteUser(1)
 
+	fmt.Println(repository.Users)
 
 }

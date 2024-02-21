@@ -6,6 +6,7 @@ import (
 
 type Service interface {
 	CreateUser(user model.UserEntity) (*model.UserEntity, error)
+	DeleteUser(id int) (int, error)
 }
 
 type UserService struct {

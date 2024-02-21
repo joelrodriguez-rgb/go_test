@@ -18,7 +18,7 @@ func (s *UserServiceImpl) CreateUser(user model.UserEntity) (model.UserEntity, e
 }
 
 
-func (s *UserServiceImpl) DeleteUser(user *model.UserEntity) (int, error) {
-	return s.repo.DeleteUser(user)
+func (s *UserServiceImpl) DeleteUser(id int) (int, error) {
+	return s.repo.DeleteUser(id)
 }
 

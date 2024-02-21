@@ -6,11 +6,12 @@ import (
 
 type UserRepository interface {
 	CreateUser(id int, name string) (model.UserEntity, error)
-	DeleteUser(user *model.UserEntity) (int, error)
+	DeleteUser(id int) (int, error)
 }
 
 type UserRepositoryImpl struct {
 	operation model.UserOperation
+	Users    []model.UserEntity
 }
 
 func NewUserRepositoryImpl(op model.UserOperation) *UserRepositoryImpl {
@@ -21,11 +22,17 @@ func NewUserRepositoryImpl(op model.UserOperation) *UserRepositoryImpl {
 
 func (e *UserRepositoryImpl) CreateUser(id int, name string) (model.UserEntity, error) {
 	u , _ := e.operation.Create(id, name)
+	e.Users = append(e.Users, u)
 	return u, nil
 }
 
-func (e *UserRepositoryImpl) DeleteUser(user *model.UserEntity) (int, error) {
-	//eliminar el valor que esta en el puntero
-	user = nil
-	return 1, nil
+func (e *UserRepositoryImpl) DeleteUser(id int) (int, error) {
+	//eliminar el usuario segun el id de la lista de users
+	for i, user := range e.Users {
+		if user.Id == id {
+			e.Users = append(e.Users[:i], e.Users[i+1:]...)
+			return id, nil
+		}
+	}
+	return 0, nil
 }
