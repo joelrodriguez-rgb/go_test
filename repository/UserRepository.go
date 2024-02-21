@@ -4,16 +4,26 @@ import "go_test/model"
 
 type UserRepository interface {
 	CreateUser(id int, name string) (model.UserEntity, error)
+	DeleteUser(user *model.UserEntity) (int, error)
 }
 
 type UserRepositoryImpl struct {
+	operation model.UserOperation
 }
 
-func NewUserRepositoryImpl() *UserRepositoryImpl {
-	return &UserRepositoryImpl{}
+func NewUserRepositoryImpl(op model.UserOperation) *UserRepositoryImpl {
+	return &UserRepositoryImpl{
+		operation: op,
+	}
 }
 
 func (e *UserRepositoryImpl) CreateUser(id int, name string) (model.UserEntity, error) {
-	user := model.UserEntity{Id: 1, Name: "asd"}
+	user := model.UserEntity{Id: id, Name: name}
 	return user, nil
+}
+
+func (e *UserRepositoryImpl) DeleteUser(user *model.UserEntity) (int, error) {
+	//eliminar el valor que esta en el puntero
+	user = nil
+	return 1, nil
 }

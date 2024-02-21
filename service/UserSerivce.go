@@ -1,11 +1,11 @@
-package main
+package service
 
 import (
 	"go_test/model"
 )
 
 type Service interface {
-	CreateUser(user model.UserEntity) (model.UserEntity, error)
+	CreateUser(user model.UserEntity) (*model.UserEntity, error)
 }
 
 type UserService struct {

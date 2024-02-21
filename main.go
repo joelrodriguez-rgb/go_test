@@ -2,19 +2,20 @@ package main
 
 import (
 	"fmt"
+	"go_test/model"
+	"go_test/repository"
+	"go_test/service"
 )
 
-func CountBy(x, n int) []int {
-	res := make([]int, n)
-	for i := 1; i <= n; i++ {
-		res[i-1] = x * i
-	}
-	return res
-}
-
 func main() {
-	// numbers := []int{1, 10}
+	var op model.UserOperation;
+	var repository repository.UserRepository = repository.NewUserRepositoryImpl(op)
 
-	fmt.Println(CountBy(1, 10))
+	var service  = service.NewUserServiceImpl(repository)
+	newUser, _ := service.CreateUser(model.UserEntity{Id: 1, Name: "Pedro"})
+
+	fmt.Println(newUser)
+
+
 
 }

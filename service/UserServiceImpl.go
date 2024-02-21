@@ -1,4 +1,4 @@
-package main
+package service
 
 import (
 	"go_test/model"
@@ -16,3 +16,9 @@ func NewUserServiceImpl(repo repository.UserRepository) *UserServiceImpl {
 func (s *UserServiceImpl) CreateUser(user model.UserEntity) (model.UserEntity, error) {
 	return s.repo.CreateUser(user.Id, user.Name)
 }
+
+
+func (s *UserServiceImpl) DeleteUser(user *model.UserEntity) (int, error) {
+	return s.repo.DeleteUser(user)
+}
+
