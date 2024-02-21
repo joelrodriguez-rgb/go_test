@@ -1,6 +1,8 @@
 package repository
 
-import "go_test/model"
+import (
+	"go_test/model"
+)
 
 type UserRepository interface {
 	CreateUser(id int, name string) (model.UserEntity, error)
@@ -18,8 +20,8 @@ func NewUserRepositoryImpl(op model.UserOperation) *UserRepositoryImpl {
 }
 
 func (e *UserRepositoryImpl) CreateUser(id int, name string) (model.UserEntity, error) {
-	user := model.UserEntity{Id: id, Name: name}
-	return user, nil
+	u , _ := e.operation.Create(id, name)
+	return u, nil
 }
 
 func (e *UserRepositoryImpl) DeleteUser(user *model.UserEntity) (int, error) {

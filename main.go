@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	var op model.UserOperation;
+	var op model.UserOperation = model.NewUserOperation()
 	var repository repository.UserRepository = repository.NewUserRepositoryImpl(op)
 
 	var service  = service.NewUserServiceImpl(repository)
