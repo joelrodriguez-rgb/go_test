@@ -10,18 +10,16 @@ type UserRepository interface {
 }
 
 type UserRepositoryImpl struct {
-	operation model.UserOperation
 	Users    []model.UserEntity
 }
 
-func NewUserRepositoryImpl(op model.UserOperation) *UserRepositoryImpl {
+func NewUserRepositoryImpl() *UserRepositoryImpl {
 	return &UserRepositoryImpl{
-		operation: op,
 	}
 }
 
 func (e *UserRepositoryImpl) CreateUser(id int, name string) (model.UserEntity, error) {
-	u , _ := e.operation.Create(id, name)
+	u := model.UserEntity{Id: id, Name: name}
 	e.Users = append(e.Users, u)
 	return u, nil
 }

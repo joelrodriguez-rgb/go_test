@@ -8,11 +8,11 @@ import (
 )
 
 func main() {
-	var op model.UserOperation = model.NewUserOperation()
-	var repository = repository.NewUserRepositoryImpl(op)
+	var repository = repository.NewUserRepositoryImpl()
 
 	var service = service.NewUserServiceImpl(repository)
 	service.CreateUser(model.UserEntity{Id: 1, Name: "Pedro"})
+	service.CreateUser(model.UserEntity{Id: 2, Name: "Juan"})
 
 	fmt.Println(repository.Users)
 
